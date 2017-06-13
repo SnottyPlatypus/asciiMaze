@@ -9,11 +9,9 @@ Maze::Maze() : width(10), height(10), ir(0)
 {
 	cells = new Cell[width * height];
 	rnd = new TCODRandom();
-	while (!anyNonVisitedCell()) {
-		firstCell.x = rnd->getInt(0, width - 1);
-		firstCell.y = rnd->getInt(0, height - 1);
-		generateMaze(firstCell);
-	}
+	//firstCell.x = rnd->getInt(0, width - 1);
+	//firstCell.y = rnd->getInt(0, height - 1);
+	generateMaze(firstCell);
 }
 
 Maze::~Maze()
@@ -25,14 +23,15 @@ void Maze::generateMaze(Position cell)
 {
 	cells[cell.x + cell.y * width].setVisited(true);
 	for (int i = 0; i < 4; i++) {
-		neighbour.x = cell.x + dx[i];
-		neighbour.y = cell.y + dy[i];
-		if (neighbour.x >= 0 && neighbour.x < width && neighbour.y >= 0 && neighbour.y < height)
-			if (!cells[neighbour.x + neighbour.y * width].getVisited())
-				neighbours.push_back(i);
+		neighbor.x = cell.x + dx[i];
+		neighbor.y = cell.y + dy[i];
+		if (neighbor.x >= 0 && neighbor.x < width && neighbor.y >= 0 && neighbor.y < height)
+			if (!cells[neighbor.x + neighbor.y * width].getVisited())
+				neighbors.push_back(i);
 	}
-	if (!neighbours.empty()) {
-		ir = neighbours[rnd->getInt(0, neighbours.size() - 1)];
+	if (!neighbors.empty()) {
+		stack.push_back(cell);
+		ir = neighbors[rnd->getInt(0, neighbors.size() - 1)];
 		if (dx[ir] == 0 && dy[ir] == -1)
 			setNorthPath(cell.x, cell.y);
 		if (dx[ir] == 0 && dy[ir] == 1)
@@ -43,7 +42,12 @@ void Maze::generateMaze(Position cell)
 			setWestPath(cell.x, cell.y);
 		cell.x += dx[ir];
 		cell.y += dy[ir];
-		neighbours.clear();
+		neighbors.clear();
+		generateMaze(cell);
+	}
+	else if(!stack.empty()) {
+		cell = stack.back();
+		stack.pop_back();
 		generateMaze(cell);
 	}
 }

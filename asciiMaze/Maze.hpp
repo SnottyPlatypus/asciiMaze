@@ -16,19 +16,18 @@ public:
 	void setEastPath(int x, int y) const;
 	void setWestPath(int x, int y) const;
 
-	Cell *cells;
-
 private:
 	int width;
 	int height;
 	int dx[4] = { 0, 1, 0, -1 };
 	int dy[4] = { -1, 0, 1, 0 };
-	Position neighbour;
-	int ir;
+	Cell *cells;
+	Position neighbor;
 	Position firstCell;
 	Position previousCell;
+	int ir;
 	TCODRandom *rnd;
-	std::vector<int> neighbours;
-	std::vector<Position> visitedCells;
+	std::vector<int> neighbors;
+	std::vector<Position> stack;
 };
 
