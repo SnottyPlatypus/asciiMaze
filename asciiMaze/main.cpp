@@ -5,6 +5,7 @@ Engine engine;
 int main()
 {
 	while(!TCODConsole::isWindowClosed()) {
+		engine.update();
 		engine.render();
 	}
 	return 0;

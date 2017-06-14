@@ -5,12 +5,10 @@
 #include <iostream>
 #include "Position.hpp"
 
-Maze::Maze() : width(10), height(10), ir(0)
+Maze::Maze() : width(39), height(24), ir(0)
 {
 	cells = new Cell[width * height];
 	rnd = new TCODRandom();
-	//firstCell.x = rnd->getInt(0, width - 1);
-	//firstCell.y = rnd->getInt(0, height - 1);
 	generateMaze(firstCell);
 }
 

@@ -119,12 +119,14 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="Maze.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="Position.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
